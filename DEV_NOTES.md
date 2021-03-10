@@ -1,5 +1,5 @@
-[10/03/2018 - 11:02]
-#DATA MODELLING:
+[10.03.2021 - 11:02]
+# DATA MODELLING:
 First insight that comes to mind is **WHAT** data am I going to work on and **HOW** should I manipulate it.
 I need a data structure that best represent my tournament, a format and a place to save it.
 
@@ -35,3 +35,24 @@ So, my data model should look like this:
         "winner": Competitor{}
 }
 ```
+
+[10.03.2021 - 15:00]
+# Models
+After a reread over the app requirements. I could remove apparently unusual information and create some new clean data models.
+
+```javascript
+{
+    "tournament_title": Tournament{
+        "competitors": Competitors[]
+    }
+}
+```
+
+With that, I can probably display the information required without the need to recur to other models of information.
+
+It was born 2 main classes inside TypeScript files to represent my main data models.
+
+[10.03.2021 - 16:20]
+# Getters/Setters and public methods
+By requirement, the tournament should allow add, remove or edit every competitor.
+So, I think those actions should be represented as methods in the data models.

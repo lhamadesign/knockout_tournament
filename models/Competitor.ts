@@ -33,4 +33,10 @@ class Competitor {
     set email(email) {
         this._email = email;
     }
+
+    public updateCompetitor(fullName: String, phone: String, email: String) {
+        this._fullName = fullName;
+        this._phone = phone;
+        this._email = email;
+    }
 };
