@@ -7,7 +7,7 @@ Initially, and in the simplest form, I am using an object to represent my tourna
 I also choose to persist that data using browser's **localStorage**, and for that I choose **JSON** format which I consider easier to work with.
 
 My tournament object model should look like this:
-<addr>
+```javascript
 {
     "tournament_title": {
         "competitors": [],
@@ -16,7 +16,7 @@ My tournament object model should look like this:
         "winner": {}
     }
 }
-</addr>
+```
 
 The result of that abstraction gave me the following identities:
 * __Tournament__
@@ -26,7 +26,7 @@ The result of that abstraction gave me the following identities:
 
 Based on this, since I have the previous definitions available, I am able to treat each piece of data according to its singular identity.
 So, my data model should look like this:
-<addr>
+```javascript
 {
     "tournament_title": Tournament{
         "competitors": Competitors[],
@@ -34,4 +34,4 @@ So, my data model should look like this:
         "matches": Match[],
         "winner": Competitor{}
 }
-</addr>
+```
