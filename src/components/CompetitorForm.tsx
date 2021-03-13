@@ -1,9 +1,14 @@
 import React from 'react';
 import { Competitor } from '../models/Competitor';
+import $ from 'jquery';
+import 'jquery-mask-plugin/dist/jquery.mask';
 
 type CompetitorFormProps = { 
-    competitor?: Competitor, 
-    submit: (competitor: Competitor) => void;
+    competitor?: {
+        value: Competitor;
+        index: number;
+    };
+    submit: (competitor: Competitor, index?: number) => void;
 };
 
 type CompetitorFormState = {
@@ -26,20 +31,46 @@ export default class CompetitorForm extends React.Component<CompetitorFormProps,
 
     constructor(props: CompetitorFormProps) {
         super(props);
-        this.state = {
-            fullName: {
-                value: "",
-                invalid: false
-            },
-            phone: {
-                value: "",
-                invalid: false
-            },
-            email: {
-                value: "",
-                invalid: false
-            },
-        };
+        if (props.competitor) {
+            const competitorToUpdate = props.competitor;
+            const state = {
+                fullName: {
+                    value: competitorToUpdate.value.fullName,
+                    invalid: false
+                },
+                phone: {
+                    value: competitorToUpdate.value.phone,
+                    invalid: false
+                },
+                email: {
+                    value: competitorToUpdate.value.email,
+                    invalid: false
+                }
+            };
+
+            this.state = state;
+        } else {
+            this.state = {
+                fullName: {
+                    value: "",
+                    invalid: false
+                },
+                phone: {
+                    value: "",
+                    invalid: false
+                },
+                email: {
+                    value: "",
+                    invalid: false
+                },
+            };
+        }
+    }
+
+    componentDidMount() {
+        $('input[name=phone]').mask('(00) 00000-0000', {
+            placeholder: '(00) 00000-0000'
+        });
     }
 
     validateFullName = (fullName: {value: string; invalid: boolean}) => {
@@ -59,7 +90,6 @@ export default class CompetitorForm extends React.Component<CompetitorFormProps,
     validatePhone = (phone: {value: string; invalid: boolean}) => {
         if (phone.value) {
             const phoneRule = new RegExp(/\(\d{2}\) ?\d{5}\-\d{4}$/);
-            console.log(phone.value, phoneRule.test(phone.value));
             if (phoneRule.test(phone.value)) {
                 phone.invalid = false;
                 this.setState({phone: phone});
@@ -99,7 +129,11 @@ export default class CompetitorForm extends React.Component<CompetitorFormProps,
         const { fullName, phone, email } = this.state;
         let newCompetitor = new Competitor(fullName.value, phone.value, email.value);
         if (newCompetitor) {
-            this.props.submit(newCompetitor);
+            if (this.props.competitor) {
+                this.props.submit(newCompetitor, this.props.competitor.index);
+            } else {
+                this.props.submit(newCompetitor);
+            }
         }
         return false;
     }
@@ -147,7 +181,7 @@ export default class CompetitorForm extends React.Component<CompetitorFormProps,
                     
                     <fieldset>
                         <label>Telefone:</label>
-                        <input type="phone" defaultValue={this.state.phone.value} onChange={this.onPhoneInput}/>
+                        <input name="phone" type="phone" defaultValue={this.state.phone.value} onChange={this.onPhoneInput}/>
                         {this.state.phone.invalid && <span style={{color: 'red'}}>Telefone inválido</span>}
                     </fieldset>
                     
@@ -157,7 +191,7 @@ export default class CompetitorForm extends React.Component<CompetitorFormProps,
                         {this.state.email.invalid && <span style={{color: 'red'}}>e-Mail inválido</span>}
                     </fieldset>
                     
-                    <button type="button" onClick={() => this.validateForm()}>Adicionar</button>
+                    <button type="button" onClick={() => this.validateForm()}>Salvar</button>
                 </form>
             </section>
         );

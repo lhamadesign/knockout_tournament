@@ -1,63 +1,95 @@
 import React from 'react';
 import CompetitorForm from './CompetitorForm';
 import { Competitor } from '../models/Competitor';
+import { Tournament } from '../models/Tournament';
 
 type TournamentState = {
-    competitors: Competitor[];
+    tournament: Tournament;
     openCompetitorForm: boolean;
     competitorForm: any;
 };
 
-export class Tournament extends React.Component {
+export class MyTournament extends React.Component {
     state: TournamentState;
 
     constructor(props: any) {
         super(props);
         this.state = {
-            competitors: new Array(),
+            tournament: new Tournament(),
             openCompetitorForm: false,
             competitorForm: undefined
         };
     }
 
     saveCompetitor = (competitor: Competitor) => {
-        const updatedCompetitors = this.state.competitors;
-        updatedCompetitors.push(competitor);
-        // save to localhost
-        this.setState({competitors: updatedCompetitors, openCompetitorForm: false});
+        const { tournament } = this.state;
+        if (competitor) {
+            tournament.addCompetitor(competitor);
+            this.setState({tournament: tournament, openCompetitorForm: false});
+        }
     };
 
-    openCompetitorForm = (update: boolean) => {
+    updateCompetitor = (competitor: Competitor, index?: number) => {
+        if (competitor && index != undefined) {
+            const { tournament } = this.state;
+            if (tournament.competitors[index]) {
+                tournament.updateCompetitor(index, competitor);
+                this.setState({tournament: tournament, openCompetitorForm: false});
+            }
+        }
+    };
+
+    removeCompetitor = (index: number) => {
+        if (index != undefined) {
+            const { tournament } = this.state;
+            if(tournament.competitors[index]) {
+                tournament.removeCompetitor(index);
+                this.setState({tournament: tournament});
+            }
+        }
+    };
+
+    openCompetitorForm = (update: boolean, competitor?: Competitor, index?: number) => {
         if(!update) {
-            const competitor = new Competitor("","","");
-            const form = new CompetitorForm({ 'competitor': competitor, 'submit': this.saveCompetitor});
+            const form = <CompetitorForm submit={this.saveCompetitor.bind(this)} />;
+            this.setState({
+                openCompetitorForm: true,
+                competitorForm: form
+            });
+        } else if (competitor && index != undefined) {
+            const form = <CompetitorForm 
+                            competitor={{'value': competitor, 'index': index}}
+                            submit={this.updateCompetitor.bind(this)}
+                        />;
             this.setState({
                 openCompetitorForm: true,
                 competitorForm: form
             });
         }
+        
     }
 
     render() {
-        let { competitors } = this.state;
-        console.log(competitors);
+        const { tournament } = this.state;
         return (
             <section>
                 <h1>Meu Torneio</h1>
                 <h2>Participantes</h2>
                 <button onClick={() => this.openCompetitorForm(false)}>Adicionar Participante</button>
                 <ul>
-                    {competitors.map((competitor, index) => {
+                    {tournament.competitors.map((competitor, index) => {
                         return (
                         <li key={index}>
                             {competitor.fullName + ',' + competitor.phone + ',' + competitor.email}
+                            <button onClick={() => this.openCompetitorForm(true, competitor, index)}>Editar informações</button>
+                            <button onClick={() => this.removeCompetitor(index)}>Excluir</button>
                         </li>
                         )
                     })}
                 </ul>
                 {this.state.openCompetitorForm && (
                     <aside>
-                        <CompetitorForm submit={this.saveCompetitor.bind(this)}/>
+                        {this.state.competitorForm}
                     </aside>
                 )}
             </section>
