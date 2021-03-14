@@ -91,3 +91,7 @@ From this point, I am trying to code a Binaty Tree structure and use it to displ
 [14.03.2021 - 01:00]
 After implementing a rough way to display the keys I am now done with functionality. Next step is to write some tests and possibly refactor code for better readability.
 The last but not least part of the development is to prettify with CSS. I am thinking on some ideas...
+
+[14.03.2021 - 17:00]
+I picked up some of the basic functions that are present on my models and components in order to write tests over them.
+I couldn't cover everything, sadly.

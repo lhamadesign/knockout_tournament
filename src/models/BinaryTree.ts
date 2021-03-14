@@ -17,7 +17,7 @@ export class BinaryTree {
         this.root = new TreeNode('');
     }
 
-    fillTree = (values: string[], node: TreeNode = this.root) => {
+    public fillTree = (values: string[], node: TreeNode = this.root) => {
         if (values.length == 2) {
           node.left = new TreeNode(values[0]);
           node.right = new TreeNode(values[1]);
@@ -31,7 +31,7 @@ export class BinaryTree {
         this.fillTree(values.slice(values.length / 2), node.right);
     };
 
-    preOrder = (node: TreeNode = this.root, storage: string[]) => {
+    public preOrder = (node: TreeNode = this.root, storage: string[]) => {
         if (!(node.right && node.left)) {
             if (node.value)
                 storage.push(node.value);

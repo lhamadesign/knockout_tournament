@@ -34,7 +34,7 @@ export class Competitor {
         this._email = email;
     }
 
-    public updateCompetitor(fullName: string, phone: string, email: string) {
+    public updateCompetitor = (fullName: string, phone: string, email: string) => {
         this._fullName = fullName;
         this._phone = phone;
         this._email = email;

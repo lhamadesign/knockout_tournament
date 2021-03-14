@@ -3,13 +3,12 @@ import CompetitorForm from './CompetitorForm';
 import { Competitor } from '../models/Competitor';
 import { Tournament } from '../models/Tournament';
 import TournamentKeys from './TournamentKeys';
-import { BinaryTree } from '../models/BinaryTree';
 
 type TournamentState = {
     tournament: Tournament;
     openCompetitorForm: boolean;
-    competitorForm: any;
-    tournamentKeys?: any;
+    competitorFormElement: any;
+    tournamentKeysElement?: any;
 };
 
 export class MyTournament extends React.Component {
@@ -20,7 +19,7 @@ export class MyTournament extends React.Component {
         this.state = {
             tournament: new Tournament(),
             openCompetitorForm: false,
-            competitorForm: undefined,
+            competitorFormElement: undefined,
         };
     }
 
@@ -79,9 +78,9 @@ export class MyTournament extends React.Component {
 
     generateTournamentKeys = (competitors: Competitor[]) => {
         let competitorNames = competitors.map(competitor => competitor.fullName);
-        let { tournamentKeys } = this.state;
-        tournamentKeys = <TournamentKeys competitorsList={competitorNames} goBack={this.closeTournamentKeys.bind(this)} />
-        this.setState({tournamentKeys: tournamentKeys});
+        let { tournamentKeysElement } = this.state;
+        tournamentKeysElement = <TournamentKeys competitorsList={competitorNames} goBack={this.closeTournamentKeys.bind(this)} />
+        this.setState({tournamentKeys: tournamentKeysElement});
     };
 
     closeTournamentKeys = () => {
@@ -89,9 +88,9 @@ export class MyTournament extends React.Component {
     }
 
     render() {
-        const { tournament, tournamentKeys } = this.state;
-        if (tournamentKeys != null) {
-            return tournamentKeys
+        const { tournament, tournamentKeysElement } = this.state;
+        if (tournamentKeysElement != null) {
+            return tournamentKeysElement
         }
         let competitorsNumber = tournament.competitors.length;
         return (
@@ -115,7 +114,7 @@ export class MyTournament extends React.Component {
                 </ul>
                 {this.state.openCompetitorForm && (
                     <aside>
-                        {this.state.competitorForm}
+                        {this.state.competitorFormElement}
                     </aside>
                 )}
             </section>

@@ -3,7 +3,7 @@ import { Competitor } from '../models/Competitor';
 import $ from 'jquery';
 import 'jquery-mask-plugin/dist/jquery.mask';
 
-type CompetitorFormProps = { 
+export type CompetitorFormProps = { 
     competitor?: {
         value: Competitor;
         index: number;

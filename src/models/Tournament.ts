@@ -3,16 +3,12 @@ import { Competitor } from './Competitor';
 export class Tournament {
         _competitors: Competitor[];
 
-        constructor() 
-        /*  It turns that is never be possible to create a new tournament 
-            with already existing competitors. */
-        {
+        constructor() {
             this._competitors = [];
             const competitorsStorage = localStorage.getItem('@knockout_tournament/competitors');
             if (competitorsStorage) {
                 let parsedCompetitors = JSON.parse(competitorsStorage);
                 for (let parsedCompetitor of parsedCompetitors) {
-                    console.log(parsedCompetitor);
                     this._competitors.push(
                         new Competitor(
                             parsedCompetitor._fullName,
