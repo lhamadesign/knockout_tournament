@@ -69,7 +69,7 @@ I'm trying to modularize my document structure into simple and consistent module
 At this point I believe that having a greater **Tournament** module would be sufficient to hold my smaller ones.
 Then comes the **Competitor** and last, the **CompetitorForm** which will be used to add/update competitors in the tournament.
 
-[12.02.2021 - 13:00]
+[12.03.2021 - 13:00]
 I need to focus on the main flow the application should follow. Basically, the user input is the most important here. Because if there is no competitors, then we can't have a tournament. Thinking that way, I need to code the CompetitorForm to be able to receive user input.
 That form should follow some rules for inputs. which are defined in the document and are as follows:
 
@@ -87,3 +87,7 @@ Time to check the rules for matching up the competitors and generate tournament 
 [13.03.2021 - 21:58]
 After some time thinking about data structures and how I could represent tournament keys the best form, I came to the conclusion that the matches looks very similar to a **Complete Binary Tree** where only the last level nodes have actual values.
 From this point, I am trying to code a Binaty Tree structure and use it to display my tournament keys. That is why I created a new model called **BinaryTree** and the TournamentKeys component to display correctly my tree.
+
+[14.03.2021 - 01:00]
+After implementing a rough way to display the keys I am now done with functionality. Next step is to write some tests and possibly refactor code for better readability.
+The last but not least part of the development is to prettify with CSS. I am thinking on some ideas...

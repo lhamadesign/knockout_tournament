@@ -12,7 +12,7 @@ class TreeNode {
 
 export class BinaryTree {
     root: TreeNode;
-    
+
     constructor() {
         this.root = new TreeNode('');
     }
@@ -29,5 +29,16 @@ export class BinaryTree {
         
         node.right = new TreeNode('');
         this.fillTree(values.slice(values.length / 2), node.right);
+    };
+
+    preOrder = (node: TreeNode = this.root, storage: string[]) => {
+        if (!(node.right && node.left)) {
+            if (node.value)
+                storage.push(node.value);
+            return;
+        }
+
+        this.preOrder(node.left, storage);
+        this.preOrder(node.right, storage);
     }
 }

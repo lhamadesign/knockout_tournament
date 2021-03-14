@@ -80,14 +80,17 @@ export class MyTournament extends React.Component {
     generateTournamentKeys = (competitors: Competitor[]) => {
         let competitorNames = competitors.map(competitor => competitor.fullName);
         let { tournamentKeys } = this.state;
-        tournamentKeys = <TournamentKeys competitorsList={competitorNames} />
+        tournamentKeys = <TournamentKeys competitorsList={competitorNames} goBack={this.closeTournamentKeys.bind(this)} />
         this.setState({tournamentKeys: tournamentKeys});
     };
 
+    closeTournamentKeys = () => {
+        this.setState({tournamentKeys: null});
+    }
+
     render() {
         const { tournament, tournamentKeys } = this.state;
-        if (tournamentKeys) {
-            console.log(tournamentKeys);
+        if (tournamentKeys != null) {
             return tournamentKeys
         }
         let competitorsNumber = tournament.competitors.length;
