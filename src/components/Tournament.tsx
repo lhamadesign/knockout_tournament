@@ -2,11 +2,14 @@ import React from 'react';
 import CompetitorForm from './CompetitorForm';
 import { Competitor } from '../models/Competitor';
 import { Tournament } from '../models/Tournament';
+import TournamentKeys from './TournamentKeys';
+import { BinaryTree } from '../models/BinaryTree';
 
 type TournamentState = {
     tournament: Tournament;
     openCompetitorForm: boolean;
     competitorForm: any;
+    tournamentKeys?: any;
 };
 
 export class MyTournament extends React.Component {
@@ -17,7 +20,7 @@ export class MyTournament extends React.Component {
         this.state = {
             tournament: new Tournament(),
             openCompetitorForm: false,
-            competitorForm: undefined
+            competitorForm: undefined,
         };
     }
 
@@ -67,13 +70,33 @@ export class MyTournament extends React.Component {
             });
         }
         
-    }
+    };
+
+    isPowerOfTwo = (value: number) => {
+        const log = Math.log2(value);
+        return (Math.ceil(log) == Math.floor(log))
+    };
+
+    generateTournamentKeys = (competitors: Competitor[]) => {
+        let competitorNames = competitors.map(competitor => competitor.fullName);
+        let { tournamentKeys } = this.state;
+        tournamentKeys = <TournamentKeys competitorsList={competitorNames} />
+        this.setState({tournamentKeys: tournamentKeys});
+    };
 
     render() {
-        const { tournament } = this.state;
+        const { tournament, tournamentKeys } = this.state;
+        if (tournamentKeys) {
+            console.log(tournamentKeys);
+            return tournamentKeys
+        }
+        let competitorsNumber = tournament.competitors.length;
         return (
             <section>
                 <h1>Meu Torneio</h1>
+                {this.isPowerOfTwo(competitorsNumber) && (
+                    <button onClick={() => this.generateTournamentKeys(tournament.competitors)}>Iniciar Torneio</button>
+                )}
                 <h2>Participantes</h2>
                 <button onClick={() => this.openCompetitorForm(false)}>Adicionar Participante</button>
                 <ul>
