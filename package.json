@@ -10,6 +10,7 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "jquery": "^3.6.0",
+    "node-sass": "^5.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.3",
@@ -44,7 +45,7 @@
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@types/jest": "^26.0.20",
-    "jest": "^26.6.3",
+    "jest": "^26.6.0",
     "jquery-mask-plugin": "^1.14.16",
     "ts-jest": "^26.5.3"
   }
