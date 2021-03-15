@@ -117,3 +117,48 @@
         }
     }
 }
+
+@media only screen and (min-width: 768px) {
+    .tournament{ 
+        .rounded-btn {
+            width: auto;
+            height: auto;
+            border-radius: 6px;
+            background: none;
+            box-shadow: none;
+            text-indent: 0;
+        }
+
+        .add-competitor-btn {
+            display: block;
+            position: relative;
+            padding: 8px 6px;
+            margin: 8px auto;
+            bottom: 0;
+            right: 0;
+            float: none;
+            background-color: $border-color;
+            border: none;
+            font-size: 16px;
+       }
+
+       .competitors {
+           width: 50%;
+           float: none;
+           display: block;
+           margin: 0 auto;
+           padding-top: 32px;
+           max-height: 80%;
+           overflow-y: scroll;
+       }
+
+       #go-keys-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            padding: 8px 6px;
+            background: none;
+            background-color: $submit-color;
+        }
+    }
+}

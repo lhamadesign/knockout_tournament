@@ -74,3 +74,26 @@
         }
     }   
 }
+
+@media only screen and (min-width: 768px) {
+    .competitor-modal {
+        .competitor-form {
+            width: 40%;
+            float: none;
+            margin: 18px auto;
+            
+            .submit-btn {
+                width: auto;
+                float: none;
+                margin: 8px auto;
+                display: block;
+                position: relative;
+                bottom: auto;
+                padding: 8px 8px;
+                border-radius: 8px;
+                font-size: 16px;
+                
+            }
+        }
+    }
+}

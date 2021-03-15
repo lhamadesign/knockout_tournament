@@ -1,0 +1,79 @@
+@import './constants';
+
+.tournament-keys {
+    h1 {
+        font-size: 20px;
+        padding: 14px 8px;
+        color: $font-color;
+        border-bottom: solid 2px $app-bg;
+        margin: 0;
+    }
+
+    .go-back-btn {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        width: 60px;
+        text-align: center;
+        padding: 6px 6px;
+        border-radius: 6px;
+        border: none;
+    }
+
+    .keys {
+        display: flex;
+        width: 94%;
+        margin: 2% 3%;
+        height: 100%;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        background-color: $modal-bg;
+
+        > .level {
+            margin: 0;
+            padding: 0;
+            border: none;
+            list-style: none;
+            flex-grow: 1;
+
+            .level-competitor:only-child {
+                background: url('../prize_icon.jpg') center center no-repeat;
+                background-size: 50px;
+            }
+
+            .level-competitor:nth-child(odd) {
+                border-right: none;
+            }
+
+            .level-competitor:nth-child(even) {
+                border-right: solid 1px $black-color;
+            }
+
+            .level-competitor:nth-child(2n) {
+                // margin-bottom: 50px;
+            }
+
+            .level-competitor {
+                border-bottom: solid 1px $black-color;
+                border-left: none;
+                margin: 0;
+                padding: 0;
+                // height: 50px;
+                width: 100%;
+
+                text-transform: uppercase;
+                font-size: 14px;
+                font-weight: bold;
+                position: relative;
+
+                .level-competitor-name {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                }
+            }
+        }
+    }
+}
