@@ -4,6 +4,8 @@ import { Competitor } from '../models/Competitor';
 import { Tournament } from '../models/Tournament';
 import TournamentKeys from './TournamentKeys';
 
+import '../scss/tournament.scss';
+
 type TournamentState = {
     tournament: Tournament;
     openCompetitorForm: boolean;
@@ -72,7 +74,7 @@ export class MyTournament extends React.Component {
     };
 
     isPowerOfTwo = (value: number) => {
-        if (value <= 0) return false;
+        if (value <= 1) return false;
         const log = Math.log2(value);
         return (Math.ceil(log) == Math.floor(log))
     };
@@ -95,20 +97,30 @@ export class MyTournament extends React.Component {
         }
         let competitorsNumber = tournament.competitors.length;
         return (
-            <section>
+            <section className="tournament">
                 <h1>Meu Torneio</h1>
                 {this.isPowerOfTwo(competitorsNumber) && (
-                    <button onClick={() => this.generateTournamentKeys(tournament.competitors)}>Iniciar Torneio</button>
+                    <button 
+                        onClick={() => this.generateTournamentKeys(tournament.competitors)}
+                        id="go-keys-btn"
+                        className="rounded-btn">Iniciar Torneio</button>
                 )}
                 <h2>Participantes</h2>
-                <button onClick={() => this.openCompetitorForm(false)}>Adicionar Participante</button>
-                <ul>
+                <button
+                    className="add-competitor-btn rounded-btn" 
+                    onClick={() => this.openCompetitorForm(false)}
+                    >Adicionar Participante</button>
+                <ul className="competitors">
                     {tournament.competitors.map((competitor, index) => {
                         return (
                         <li key={index}>
-                            {competitor.fullName + ',' + competitor.phone + ',' + competitor.email}
-                            <button onClick={() => this.openCompetitorForm(true, competitor, index)}>Editar informações</button>
-                            <button onClick={() => this.removeCompetitor(index)}>Excluir</button>
+                            <span className="competitor-name">{competitor.fullName}</span>
+                            <span className="competitor-phone secondary-info">{competitor.phone}</span>
+                            <span className="competitor-email secondary-info">{competitor.email}</span>
+                            <div className="competitor-actions">
+                            <button className="edit-btn" onClick={() => this.openCompetitorForm(true, competitor, index)}>editar</button>
+                            <button className="del-btn" onClick={() => this.removeCompetitor(index)}>excluir</button>
+                            </div>
                         </li>
                         )
                     })}

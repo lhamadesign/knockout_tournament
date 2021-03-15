@@ -1,0 +1,119 @@
+@import './constants';
+
+.tournament {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+
+    h1 {
+        font-size: 20px;
+        padding: 14px 8px;
+        color: $font-color;
+        border-bottom: solid 2px $app-bg;
+        margin: 0;
+    }
+
+    .rounded-btn {
+        width: 0px;
+        height: 0px;
+        border-radius: 50%;
+        background-size: 75%;
+        background-position: center center;
+        background-repeat: no-repeat;
+        border: none;
+        box-shadow: 1px 2px 2px $prize-color;
+        background-color: transparent;
+        text-indent: -999em;
+    }
+
+    #go-keys-btn {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        background-image: url(../tournament_icon.png);
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 16px;
+        color: $font-color;
+        opacity: 0.8;
+        padding: 8px;
+        border-bottom: solid 2px $border-color;
+    }
+
+    .add-competitor-btn {
+        position: fixed;
+        bottom: 16px;
+        right: 16px;
+        padding: 30px;
+        background-image: url(../add_icon.png);
+        background-color: $modal-bg;
+    }
+
+    .competitors {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+
+        li {
+            width: 96%;
+            display: block;
+            margin: 0;
+            padding: 14px 2%;
+            position: relative;
+
+            .competitor-name {
+                text-transform: uppercase;
+                font-size: 16px;
+                font-weight: bold;
+                display: block;
+            }
+
+            .secondary-info {
+                font-size: 14px;
+                color: $font-color;
+                opacity: 0.8;
+                text-transform: lowercase;
+                display: inline-block;
+            }
+
+            .competitor-phone {
+                margin-right: 8px;
+            }
+            
+            .competitor-email {
+                margin: 0;
+            }
+
+            .competitor-actions {
+                display: block;
+                float: right;
+                position: absolute;
+                top: 50%;
+                right: 14px;
+                transform: translateY(-50%);
+
+                button {
+                    width: 60px;
+                    text-align: center;
+                    padding: 6px 6px;
+                    border-radius: 6px;
+                    border: none;
+                }
+
+                .edit-btn {
+                    display: block;
+                    background-color: $app-bg;
+                }
+
+                .del-btn {
+                    background-color: $danger-color;
+                    color: $modal-bg;
+                }
+            }
+        }
+    }
+}
