@@ -2,6 +2,7 @@ import React from 'react';
 import { Competitor } from '../models/Competitor';
 import $ from 'jquery';
 import 'jquery-mask-plugin/dist/jquery.mask';
+import '../scss/competitorForm.scss';
 
 export type CompetitorFormProps = { 
     competitor?: {
@@ -170,28 +171,31 @@ export default class CompetitorForm extends React.Component<CompetitorFormProps,
 
     render() {
         return (
-            <section>
+            <section className="modal competitor-modal">
                 <h3>Adicionar Participante</h3>
-                <form>
+                <form className="competitor-form">
                     <fieldset>
                         <label>Nome:</label>
                         <input type="text" defaultValue={this.state.fullName.value} onChange={this.onFullNameInput} />
-                        {this.state.fullName.invalid && <span style={{color: 'red'}}>Nome inválido</span>}
+                        {this.state.fullName.invalid && <span className="error-input">Nome inválido</span>}
                     </fieldset>
                     
                     <fieldset>
                         <label>Telefone:</label>
                         <input name="phone" type="phone" defaultValue={this.state.phone.value} onChange={this.onPhoneInput}/>
-                        {this.state.phone.invalid && <span style={{color: 'red'}}>Telefone inválido</span>}
+                        {this.state.phone.invalid && <span className="error-input">Telefone inválido</span>}
                     </fieldset>
                     
                     <fieldset>
                         <label>Email:</label>
                         <input type="email" defaultValue={this.state.email.value} onChange={this.onEmailInput} />
-                        {this.state.email.invalid && <span style={{color: 'red'}}>e-Mail inválido</span>}
+                        {this.state.email.invalid && <span className="error-input">e-Mail inválido</span>}
                     </fieldset>
                     
-                    <button type="button" onClick={() => this.validateForm()}>Salvar</button>
+                    <button 
+                        type="button"
+                        onClick={() => this.validateForm()}
+                        className="submit-btn">Salvar</button>
                 </form>
             </section>
         );

@@ -56,7 +56,7 @@ export class MyTournament extends React.Component {
             const form = <CompetitorForm submit={this.saveCompetitor.bind(this)} />;
             this.setState({
                 openCompetitorForm: true,
-                competitorForm: form
+                competitorFormElement: form
             });
         } else if (competitor && index != undefined) {
             const form = <CompetitorForm 
@@ -65,13 +65,14 @@ export class MyTournament extends React.Component {
                         />;
             this.setState({
                 openCompetitorForm: true,
-                competitorForm: form
+                competitorFormElement: form
             });
         }
         
     };
 
     isPowerOfTwo = (value: number) => {
+        if (value <= 0) return false;
         const log = Math.log2(value);
         return (Math.ceil(log) == Math.floor(log))
     };
@@ -80,11 +81,11 @@ export class MyTournament extends React.Component {
         let competitorNames = competitors.map(competitor => competitor.fullName);
         let { tournamentKeysElement } = this.state;
         tournamentKeysElement = <TournamentKeys competitorsList={competitorNames} goBack={this.closeTournamentKeys.bind(this)} />
-        this.setState({tournamentKeys: tournamentKeysElement});
+        this.setState({tournamentKeysElement: tournamentKeysElement});
     };
 
     closeTournamentKeys = () => {
-        this.setState({tournamentKeys: null});
+        this.setState({tournamentKeysElement: null});
     }
 
     render() {
