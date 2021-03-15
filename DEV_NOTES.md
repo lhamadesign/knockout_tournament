@@ -95,3 +95,6 @@ The last but not least part of the development is to prettify with CSS. I am thi
 [14.03.2021 - 17:00]
 I picked up some of the basic functions that are present on my models and components in order to write tests over them.
 I couldn't cover everything, sadly.
+
+[15.03.2021 - 13:00]
+I think I finally came to a solution. I am not fully happy because I wanted to make the tournament keys to be display responsively. But I couldn't. That part took me a lot of thinking, displaying that data was a hard work.
